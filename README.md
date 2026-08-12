@@ -10,7 +10,7 @@ npm run data:build
 npm run dev
 ```
 
-Open `http://localhost:3000`. Explorer Atlas is the selected primary experience and loads at the root URL. The site works immediately with the generated static archive; authentication and moderation show a safe preview state until Supabase is connected.
+Open `http://localhost:3000`. Explorer Atlas loads directly at the root URL. Records use `/records/:id` and the family submission form uses `/submit`. The site works immediately with the generated static archive; authentication and moderation show a safe preview state until Supabase is connected.
 
 ## Data workflow
 
@@ -33,4 +33,4 @@ The admin approval transaction intentionally leaves current-record classificatio
 
 ## Appearance
 
-Explorer Atlas is the single supported design at `/concepts/atlas`. Its header theme menu offers Coastal, Heritage, and Nightfall palettes without changing the site structure or functionality. A visitor's selection is retained in their browser.
+Explorer Atlas is the single production design at `/`. Its header theme menu offers Coastal, Heritage, and Nightfall palettes without changing the site structure or functionality. A visitor's selection is retained in their browser. Old `/concepts/atlas` links redirect to their clean replacements.

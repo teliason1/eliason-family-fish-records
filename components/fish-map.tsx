@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import type { Concept, FishRecord } from "@/lib/types";
+import type { FishRecord } from "@/lib/types";
 import { useRouter } from "next/navigation";
 
-export default function FishMap({ records, concept }: { records: FishRecord[]; concept: Concept }) {
+export default function FishMap({ records }: { records: FishRecord[] }) {
   const node = useRef<HTMLDivElement>(null);
   const mapRef = useRef<import("leaflet").Map | null>(null);
   const router = useRouter();
@@ -28,7 +28,7 @@ export default function FishMap({ records, concept }: { records: FishRecord[]; c
           : `<span class="map-preview-placeholder" aria-hidden="true">No photo</span>`;
         const tooltip = `<span class="map-preview">${preview}<span class="map-preview-copy"><strong>${escapeHtml(record.species)}</strong><span>${escapeHtml(record.angler)}</span>${estimated ? "<em>Approximate location</em>" : ""}</span></span>`;
         const marker = L.marker([record.lat!, record.lng!], { icon }).addTo(map).bindTooltip(tooltip, { direction: "top", className: "fish-map-tooltip", opacity: 1, offset: [0, -8] });
-        marker.on("click", () => router.push(`/concepts/${concept}/records/${record.id}`));
+        marker.on("click", () => router.push(`/records/${record.id}`));
         markers.push(marker);
       });
       if (markers.length) {
@@ -37,7 +37,7 @@ export default function FishMap({ records, concept }: { records: FishRecord[]; c
       } else map.setView([39, -96], 4);
     });
     return () => { active = false; if (mapRef.current) { mapRef.current.remove(); mapRef.current = null; } };
-  }, [records, concept, router]);
+  }, [records, router]);
 
   return <div className="map-canvas" ref={node} aria-label={`Map showing ${records.filter((r) => r.lat !== null).length} catches`} />;
 }

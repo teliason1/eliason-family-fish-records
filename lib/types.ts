@@ -29,5 +29,3 @@ export interface RecordFilters {
   yearTo: number;
   photosOnly: boolean;
 }
-
-export type Concept = "atlas";
