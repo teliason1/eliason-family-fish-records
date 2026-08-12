@@ -1,0 +1,12 @@
+import Link from "next/link";
+import type { Concept, FishRecord } from "@/lib/types";
+import { formatDate, locationLabel, sizeLabel } from "@/lib/data";
+import { ArrowRight, CalendarDays, MapPin, Ruler, Trophy, Waves } from "./icons";
+import { RecordImage } from "./record-image";
+import dynamic from "next/dynamic";
+
+const FishMap = dynamic(() => import("./fish-map"), { ssr: true });
+export function RecordDetail({ record, concept, related }: { record: FishRecord; concept: Concept; related: FishRecord[] }) {
+  const estimateLabel = [record.city, record.state].filter(Boolean).join(", ");
+  return <main className="detail-page"><Link className="back-link" href={`/concepts/${concept}`}>← Back to all catches</Link><section className="detail-hero"><div className="detail-photo"><RecordImage src={record.photo} alt={`${record.species} caught by ${record.angler}`} priority /></div><div className="detail-copy"><span className={`status status-${record.status}`}>{record.status === "current" && <Trophy size={13} />}{record.status} {record.status === "current" ? "family record" : "catch"}</span><h1>{record.species}</h1><p className="detail-angler">Caught by <strong>{record.angler}</strong></p><div className="detail-facts"><div><CalendarDays /><span><small>Caught on</small>{formatDate(record.date)}</span></div><div><Ruler /><span><small>Recorded size</small>{sizeLabel(record)}</span></div><div><MapPin /><span><small>Location</small>{locationLabel(record) || "Not recorded"}</span></div><div><Waves /><span><small>Caught with</small>{record.caughtWith || "Not recorded"}</span></div></div>{record.story && <div className="story"><span>The story</span><p>{record.story}</p></div>}</div></section>{record.lat !== null && record.lng !== null && <section className="detail-map"><div><span className="kicker">Catch location</span><h2>Where it happened</h2><p>{record.coordinateAccuracy === "estimated" ? `The original record did not include coordinates, so this marker uses the approximate center of ${estimateLabel}.` : "Coordinates are shown exactly as recorded in the original family archive."}</p></div><div className="small-map"><FishMap records={[record]} concept={concept} /></div></section>}{related.length > 0 && <section className="related"><span className="kicker">More from the archive</span><h2>Other {record.species} catches</h2><div>{related.map((r) => <Link key={r.id} href={`/concepts/${concept}/records/${r.id}`}><span>{formatDate(r.date)} · {r.angler}</span><strong>{sizeLabel(r)}</strong><ArrowRight /></Link>)}</div></section>}</main>;
+}
