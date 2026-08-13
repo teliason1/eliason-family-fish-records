@@ -144,42 +144,6 @@
     "photo": "/fish/126-spotted-bass.jpg"
   },
   {
-    "id": 1002,
-    "species": "Sand Shiner",
-    "angler": "Karl Eliason",
-    "date": "2025-07-27",
-    "weight": null,
-    "length": 2.9,
-    "state": "Indiana",
-    "city": "Greencastle",
-    "water": "Big Walnut Creek",
-    "caughtWith": "Red Worm",
-    "status": "micro",
-    "story": "First time micro fishing",
-    "lat": 39.6444898,
-    "lng": -86.8647316,
-    "coordinateAccuracy": "estimated",
-    "photo": null
-  },
-  {
-    "id": 1001,
-    "species": "Bluntnose Minnow",
-    "angler": "Karl Eliason",
-    "date": "2025-07-27",
-    "weight": null,
-    "length": 2.5,
-    "state": "Indiana",
-    "city": "Greencastle",
-    "water": "Big Walnut Creek",
-    "caughtWith": "Red Worm",
-    "status": "micro",
-    "story": "First time micro fishing",
-    "lat": 39.6444898,
-    "lng": -86.8647316,
-    "coordinateAccuracy": "estimated",
-    "photo": null
-  },
-  {
     "id": 125,
     "species": "Bluegill",
     "angler": "Karl Eliason",
@@ -214,24 +178,6 @@
     "lng": -86.94589,
     "coordinateAccuracy": "exact",
     "photo": "/fish/124-longear-sunfish.jpg"
-  },
-  {
-    "id": 1003,
-    "species": "Blackspotted Topminnow",
-    "angler": "Karl Eliason",
-    "date": "2025-04-02",
-    "weight": null,
-    "length": null,
-    "state": "Arkansas",
-    "city": "Hot Springs",
-    "water": "Lake Hamilton",
-    "caughtWith": "Water Bottle Trap",
-    "status": "micro",
-    "story": "Made a trap with a plastic water bottle",
-    "lat": 34.5038393,
-    "lng": -93.0552437,
-    "coordinateAccuracy": "estimated",
-    "photo": null
   },
   {
     "id": 123,
@@ -1743,7 +1689,7 @@
     "lat": 42.6153595,
     "lng": -70.6624608,
     "coordinateAccuracy": "estimated",
-    "photo": null
+    "photo": "/fish/15-striped-bass.jpg"
   },
   {
     "id": 95,
@@ -1887,7 +1833,7 @@
     "lat": 36.46534,
     "lng": -92.63875,
     "coordinateAccuracy": "exact",
-    "photo": null
+    "photo": "/fish/100-spotted-bass.jpg"
   },
   {
     "id": 25,
@@ -1905,7 +1851,7 @@
     "lat": 43.3614989,
     "lng": -70.4771132,
     "coordinateAccuracy": "estimated",
-    "photo": null
+    "photo": "/fish/25-striped-bass.jpg"
   },
   {
     "id": 102,
@@ -2049,7 +1995,7 @@
     "lat": 45.2538,
     "lng": -69.4455,
     "coordinateAccuracy": "estimated",
-    "photo": null
+    "photo": "/fish/104-striped-bass.jpg"
   },
   {
     "id": 42,

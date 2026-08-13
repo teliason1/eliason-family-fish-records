@@ -70,16 +70,22 @@ def clean(value):
     return value
 
 
-def mapped_photos(archive: ZipFile) -> dict[int, str]:
+def mapped_photos(archive: ZipFile) -> tuple[dict[int, str], dict[str, str]]:
     twb = next(name for name in archive.namelist() if name.lower().endswith(".twb"))
     root = ET.fromstring(archive.read(twb))
-    mapping = {}
+    id_mapping = {}
+    species_mapping = {}
     for image in root.findall(".//mapped-image"):
-        id_filter = image.find(".//groupfilter[@level='[ID]']")
         expression = image.get("expression", "")
-        if id_filter is not None and expression.startswith("file:Image/"):
-            mapping[int(id_filter.get("member"))] = expression.removeprefix("file:")
-    return mapping
+        if not expression.startswith("file:Image/"):
+            continue
+        id_filter = image.find(".//groupfilter[@level='[ID]']")
+        species_filter = image.find(".//groupfilter[@level='[Fish Species]']")
+        if id_filter is not None:
+            id_mapping[int(id_filter.get("member"))] = expression.removeprefix("file:")
+        elif species_filter is not None:
+            species_mapping[species_filter.get("member").strip('"')] = expression.removeprefix("file:")
+    return id_mapping, species_mapping
 
 
 def main():
@@ -88,8 +94,8 @@ def main():
     workbook = load_workbook(XLSX, read_only=True, data_only=True)
     records = []
     with ZipFile(TWBX) as archive:
-        photos = mapped_photos(archive)
-        for sheet_name in ("Index Sheet", "Micro"):
+        photos, species_photos = mapped_photos(archive)
+        for sheet_name in ("Index Sheet",):
             sheet = workbook[sheet_name]
             headers = [cell.value for cell in next(sheet.iter_rows())]
             for values in sheet.iter_rows(min_row=2, values_only=True):
@@ -98,8 +104,8 @@ def main():
                 row = {key: clean(value) for key, value in zip(headers, values)}
                 record_id = int(row["ID"])
                 photo_url = None
-                if record_id in photos or record_id in RECOVERED_PHOTOS:
-                    archive_name = photos[record_id] if record_id in photos else f"Image/{RECOVERED_PHOTOS[record_id]}"
+                if record_id in photos or record_id in RECOVERED_PHOTOS or row["Fish Species"] in species_photos:
+                    archive_name = photos.get(record_id) or (f"Image/{RECOVERED_PHOTOS[record_id]}" if record_id in RECOVERED_PHOTOS else species_photos[row["Fish Species"]])
                     suffix = Path(archive_name).suffix.lower().replace(".gif", ".gif")
                     filename = f"{record_id}-{slug(row['Fish Species'])}{suffix}"
                     destination = PHOTO_OUT / filename

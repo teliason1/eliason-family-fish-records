@@ -4,6 +4,7 @@ const url=process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
 const key=process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 if(!url||!key) throw new Error("Add SUPABASE_URL (or NEXT_PUBLIC_SUPABASE_URL) and SUPABASE_SECRET_KEY to .env.local");
 const db=createClient(url,key,{auth:{persistSession:false}});
+const {error:deleteError}=await db.from("catches").delete().eq("status","micro"); if(deleteError) throw deleteError;
 const rows=records.map(r=>({legacy_id:r.id,species:r.species,angler:r.angler,date:r.date,weight:r.weight,length:r.length,state:r.state,city:r.city,water:r.water,caught_with:r.caughtWith,story:r.story,status:r.status,lat:r.lat,lng:r.lng,coordinate_accuracy:r.coordinateAccuracy,photo_url:r.photo}));
 const {error}=await db.from("catches").upsert(rows,{onConflict:"legacy_id"}); if(error) throw error;
 console.log(`Seeded ${rows.length} catches`);

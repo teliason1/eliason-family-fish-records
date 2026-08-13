@@ -7,7 +7,6 @@ import { Search, SlidersHorizontal, X } from "./icons";
 const statuses: { value: RecordStatus; label: string }[] = [
   { value: "current", label: "Current records" },
   { value: "historical", label: "Past records" },
-  { value: "micro", label: "Micro catches" },
 ];
 
 export function FilterPanel({ filters, setFilters, mobileOpen, close }: { filters: RecordFilters; setFilters: (next: RecordFilters) => void; mobileOpen: boolean; close: () => void }) {
