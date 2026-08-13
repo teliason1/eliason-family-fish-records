@@ -31,9 +31,8 @@ export function Explorer() {
   return <>
     <section className="hero">
       <div className="hero-copy"><span className="kicker">Five decades on the water</span><h1>Family Fish Records</h1><p>Follow our fishing history across decades, species, and waters—from Alaska to the Atlantic.</p></div>
-      <div className="stats"><div><strong>{records.length}</strong><span>family catches</span></div><div><strong>{new Set(records.map(r => r.species)).size}</strong><span>species</span></div><div><strong>{new Set(records.map(r => r.angler)).size}</strong><span>anglers</span></div><div><strong>{new Date().getFullYear() - Math.min(...records.map(r => +r.date.slice(0,4)))}</strong><span>years of stories</span></div></div>
+      <Leaderboard records={records} />
     </section>
-    <Leaderboard records={records} />
     <section className="explorer-shell">
       <FilterPanel filters={filters} setFilters={setFilters} mobileOpen={mobileFilters} close={() => setMobileFilters(false)} />
       <main className="results">

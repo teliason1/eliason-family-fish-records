@@ -22,6 +22,7 @@ PHOTO_OUT = ROOT / "public" / "fish"
 # These names are explicit rather than fuzzy-matched so a catch never receives the
 # wrong family photograph.
 RECOVERED_PHOTOS = {
+    15: "striper05.jpg", 25: "striper7.jpg", 104: "striper.jpg",
     133: "LongfinSquid2.jpg", 119: "RockBass23.jpg", 49: "hake.jpg",
     114: "RainbowTrout6-11-2020.jpg", 54: "hogsucker.jpg", 57: "bonito1.jpg",
     59: "skipjack.jpg", 112: "yellowfin17.jpg", 8: "mahi-mahi17.jpg",
