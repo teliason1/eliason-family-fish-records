@@ -40,7 +40,7 @@ export function Explorer() {
         {filtered.length === 0 ? <div className="empty-state"><Waves size={48} /><h2>No catches in these waters</h2><p>Try removing a filter or widening the year range.</p></div> : view === "gallery" ? <div className="card-grid">{filtered.map((r) => <RecordCard key={r.id} record={r} />)}</div> : view === "list" ? <RecordTable records={filtered} /> : <div className="map-panel"><FishMap records={filtered} /><div className="map-legend"><span><i className="current-dot" />Current</span><span><i className="past-dot" />Past</span><span><i className="estimate-dot" />Approximate</span></div></div>}
       </main>
     </section>
-  </>;g
+  </>;
 }
 
 function filterRecords(records: FishRecord[], f: RecordFilters) {
