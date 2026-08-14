@@ -30,7 +30,7 @@ export function Explorer() {
 
   return <>
     <section className="hero">
-      <div className="hero-copy"><span className="kicker">Five decades on the water</span><h1>Family Fish Records</h1><p>Follow our fishing history across decades, species, and waters—from Alaska to the Atlantic.</p></div>
+      <div className="hero-copy"><h1>Family Fish Records</h1><p>For bragging rights only!</p></div>
       <Leaderboard records={records} />
     </section>
     <section className="explorer-shell">
@@ -40,7 +40,7 @@ export function Explorer() {
         {filtered.length === 0 ? <div className="empty-state"><Waves size={48} /><h2>No catches in these waters</h2><p>Try removing a filter or widening the year range.</p></div> : view === "gallery" ? <div className="card-grid">{filtered.map((r) => <RecordCard key={r.id} record={r} />)}</div> : view === "list" ? <RecordTable records={filtered} /> : <div className="map-panel"><FishMap records={filtered} /><div className="map-legend"><span><i className="current-dot" />Current</span><span><i className="past-dot" />Past</span><span><i className="estimate-dot" />Approximate</span></div></div>}
       </main>
     </section>
-  </>;
+  </>;g
 }
 
 function filterRecords(records: FishRecord[], f: RecordFilters) {
