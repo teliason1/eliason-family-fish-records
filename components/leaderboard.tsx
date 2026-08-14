@@ -15,7 +15,7 @@ const plots: { value: Plot; label: string }[] = [
 ];
 
 export function Leaderboard({ records }: { records: FishRecord[] }) {
-  const [plot, setPlot] = useState<Plot>("podium");
+  const [plot, setPlot] = useState<Plot>("bars");
   const leaders = [...records.filter((r) => r.status === "current").reduce((counts, record) => counts.set(record.angler, (counts.get(record.angler) || 0) + 1), new Map<string, number>())].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 
   return <section className="leaderboard" aria-labelledby="leaderboard-title">
