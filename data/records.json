@@ -1,4 +1,21 @@
-[
+[  {
+    "id": 135,
+    "species": "Test Bass",
+    "angler": "Karl Eliason",
+    "date": "2026-08-15",
+    "weight": null,
+    "length": 32.0,
+    "state": "Indiana",
+    "city": "Greencastle",
+    "water": "Storm Sewer",
+    "caughtWith": "Luck",
+    "status": "current",
+    "story": "Testing adding a new record.",
+    "lat": 27.7635302,
+    "lng": -97.4033191,
+    "coordinateAccuracy": "estimated",
+    "photo": "/fish/135-Test-Bass.jpg"
+  },
   {
     "id": 134,
     "species": "Saltwater Catfish (HardHead)",
