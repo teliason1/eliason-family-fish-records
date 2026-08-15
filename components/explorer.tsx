@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { maxYear, minYear, records as allRecords } from "@/lib/data";
 import type { FishRecord, RecordFilters } from "@/lib/types";
@@ -22,8 +22,7 @@ export function Explorer() {
   const [view, setView] = useState<View>(initialView);
   const [filters, setFilters] = useState<RecordFilters>({ query: "", anglers: [], species: [], states: [], statuses: [], yearFrom: minYear, yearTo: maxYear, photosOnly: false });
   const [mobileFilters, setMobileFilters] = useState(false);
-  const [records, setRecords] = useState(allRecords);
-  useEffect(() => { fetch("/api/catches").then((r) => r.ok ? r.json() : null).then((data) => { if (Array.isArray(data) && data.length) setRecords(data); }).catch(() => {}); }, []);
+  const records = allRecords;
   const filtered = useMemo(() => filterRecords(records, filters), [filters, records]);
   const mapped = filtered.filter((r) => r.lat !== null && r.lng !== null).length;
   const changeView = (next: View) => { setView(next); const p = new URLSearchParams(params); p.set("view", next); router.replace(`?${p}`, { scroll: false }); };

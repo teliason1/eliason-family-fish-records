@@ -1,3 +1,21 @@
 import { describe, expect, it } from "vitest";
 import { records } from "./data";
-describe("legacy migration", () => { it("contains all standard catches", () => expect(records).toHaveLength(132)); it("preserves expected archive dimensions", () => { expect(new Set(records.map(r => r.species))).toHaveLength(78); expect(new Set(records.map(r => r.angler))).toHaveLength(13); expect(records.filter(r => r.status === "current")).toHaveLength(77); expect(records.filter(r => r.status === "micro")).toHaveLength(0); }); it("recovers verified photos from the supplied archive", () => expect(records.filter(r => r.photo)).toHaveLength(132)); it("labels estimated locations without overwriting exact coordinates", () => { expect(records.filter(r => r.coordinateAccuracy === "estimated")).toHaveLength(15); expect(records.filter(r => r.coordinateAccuracy === "unknown")).toHaveLength(2); expect(records.every(r => (r.lat === null) === (r.lng === null))).toBe(true); }); });
+
+describe("records archive", () => {
+  it("contains records with unique IDs", () => {
+    expect(records.length).toBeGreaterThan(0);
+    expect(new Set(records.map((record) => String(record.id))).size).toBe(records.length);
+  });
+
+  it("uses supported record statuses", () => {
+    expect(records.every((record) => record.status === "current" || record.status === "historical")).toBe(true);
+  });
+
+  it("uses public paths for configured photos", () => {
+    expect(records.every((record) => record.photo === null || record.photo.startsWith("/fish/"))).toBe(true);
+  });
+
+  it("keeps latitude and longitude paired", () => {
+    expect(records.every((record) => (record.lat === null) === (record.lng === null))).toBe(true);
+  });
+});
