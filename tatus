@@ -1,0 +1,39 @@
+[1mdiff --git a/components/filter-panel.tsx b/components/filter-panel.tsx[m
+[1mindex 55ca240..3c87ba4 100644[m
+[1m--- a/components/filter-panel.tsx[m
+[1m+++ b/components/filter-panel.tsx[m
+[36m@@ -20,16 +20,17 @@[m [mexport function FilterPanel({ filters, setFilters, mobileOpen, close }: { filter[m
+   return <aside className={`filters ${mobileOpen ? "filters-open" : ""}`} aria-label="Record filters">[m
+     <div className="filter-title"><span><SlidersHorizontal size={18} /> Filters {activeCount > 0 && <b>{activeCount}</b>}</span><button className="icon-button filter-close" onClick={close} aria-label="Close filters"><X /></button></div>[m
+     <label className="search-box"><Search size={18} /><input value={filters.query} onChange={(e) => setFilters({ ...filters, query: e.target.value })} placeholder="Search catches, places, stories…" /></label>[m
+[32m+[m[32m     <MultiSelect title="Angler" values={anglers} selected={filters.anglers} toggle={(v) => toggle("anglers", v)} />[m
+[32m+[m[32m    <MultiSelect title="Species" values={species} selected={filters.species} toggle={(v) => toggle("species", v)} />[m
+[32m+[m[32m    <MultiSelect title="State / region" values={states} selected={filters.states} toggle={(v) => toggle("states", v)} />[m
+     <FilterGroup title="Record type">[m
+       {statuses.map((s) => <CheckOption key={s.value} label={s.label} checked={filters.statuses.includes(s.value)} onChange={() => toggle("statuses", s.value)} />)}[m
+[31m-      <CheckOption label="Has a photo" checked={filters.photosOnly} onChange={() => setFilters({ ...filters, photosOnly: !filters.photosOnly })} />[m
+[32m+[m[41m      [m
+     </FilterGroup>[m
+     <FilterGroup title="Year">[m
+       <div className="year-row"><label>From<select value={filters.yearFrom} onChange={(e) => setFilters({ ...filters, yearFrom: +e.target.value })}>{yearOptions()}</select></label><label>To<select value={filters.yearTo} onChange={(e) => setFilters({ ...filters, yearTo: +e.target.value })}>{yearOptions()}</select></label></div>[m
+     </FilterGroup>[m
+[31m-    <MultiSelect title="Angler" values={anglers} selected={filters.anglers} toggle={(v) => toggle("anglers", v)} />[m
+[31m-    <MultiSelect title="Species" values={species} selected={filters.species} toggle={(v) => toggle("species", v)} />[m
+[31m-    <MultiSelect title="State / region" values={states} selected={filters.states} toggle={(v) => toggle("states", v)} />[m
+[32m+[m[41m   [m
+     {activeCount > 0 && <button className="text-button reset-button" onClick={reset}>Clear all filters</button>}[m
+   </aside>;[m
+ }[m
+[1mdiff --git a/data/records.json b/data/records.json[m
+[1mindex 6e2d41e..1d0ce3b 100644[m
+[1m--- a/data/records.json[m
+[1m+++ b/data/records.json[m
+[36m@@ -7,7 +7,7 @@[m
+     "length": 10.0,[m
+     "state": "Massachusetts",[m
+     "city": "Marblehead",[m
+[31m-    "water": "Tinkers Ledge,Atlantic Ocean",[m
+[32m+[m[32m    "water": "Atlantic Ocean",[m
+     "caughtWith": "Diamond Jig",[m
+     "status": "current",[m
+     "story": "Caught on a diamond jig on Tinkers Ledge in about 70 feet of water off of Marblehead, MA",[m
